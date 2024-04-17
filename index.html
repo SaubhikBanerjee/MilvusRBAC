@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta name="google-site-verification" content="Cy9euEVlDhraGDP-mrTfl6hcV0nwJj6zds94ZdglBWM" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Milvus Role Base Access Control | MilvusRBAC</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Milvus Role Base Access Control" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Implement Milvus Role Base Access Control (RBAC)" />
+<meta property="og:description" content="Implement Milvus Role Base Access Control (RBAC)" />
+<link rel="canonical" href="https://saubhikbanerjee.github.io/MilvusRBAC/" />
+<meta property="og:url" content="https://saubhikbanerjee.github.io/MilvusRBAC/" />
+<meta property="og:site_name" content="MilvusRBAC" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Milvus Role Base Access Control" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Implement Milvus Role Base Access Control (RBAC)","headline":"Milvus Role Base Access Control","name":"MilvusRBAC","url":"https://saubhikbanerjee.github.io/MilvusRBAC/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/MilvusRBAC/assets/css/style.css?v=03cf8e4b0e8e21eea30241339a4ef452d513ebc4">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/MilvusRBAC/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://saubhikbanerjee.github.io/MilvusRBAC/">MilvusRBAC</a></h1>
+      
+
+      <h1 id="-milvus-role-base-access-control"><img src="images%2Fmilvus_icon.png" alt="milvus_icon.png" /> Milvus <strong>R</strong>ole <strong>B</strong>ase <strong>A</strong>ccess <strong>C</strong>ontrol</h1>
+<h2 id="users">Users:</h2>
+<p>Milvus creates a root user by default with a default password Milvus. The root user is 
+granted the admin privileges, which means that this root user can have access to all 
+resources and perform all actions.</p>
+<h3 id="current-situation">Current Situation:</h3>
+<p>Only <code class="language-plaintext highlighter-rouge">root</code> user is there and no role is implemented. APIs access through <code class="language-plaintext highlighter-rouge">root</code> user.</p>
+<h3 id="what-is-users-roles-objects-and-privileges-in-role-based-access-control-rbac">What is users, roles, objects, and privileges in role-based access control (RBAC).</h3>
+<ul>
+  <li><strong>Object:</strong> An object to grant or deny access to. The object can be a collection, a partition, etc.</li>
+  <li><strong>User:</strong> A user identity with a username and a corresponding password.</li>
+  <li><strong>Privilege:</strong> A privilege defines the actions that can be performed and resources that can be accessed. A privilege cannot be granted to a user directly. It has to be granted to a role first.</li>
+  <li><strong>Role:</strong> A role defines the privilege(s) a user has to certain objects. After binding a role to a user, the user inherits all the privileges that are granted to this role.
+    <h2 id="proposed-rbac-architecture">Proposed RBAC Architecture:</h2>
+    <p><img src="images%2Frbac_architecture.png" alt="rbac_architecture.png" /></p>
+    <h3 id="files-in-this-repository">Files in this repository</h3>
+    <h4 id="configini"><a href="config%2Fconfig.ini">config.ini</a></h4>
+    <p>Place your configuration here. <br />
+<strong>MILVUS</strong> section is used to mention your Milvus database connection credentials.<br />
+<strong>LOG</strong> section is used to mention the logging configuration.<br />
+You can mention <code class="language-plaintext highlighter-rouge">n</code>  number of teams as per your need, the format should be same!<br />
+TEAM_<code class="language-plaintext highlighter-rouge">n</code> <br />
+team<code class="language-plaintext highlighter-rouge">n</code>_user_name = my_team1_usr <br />
+team<code class="language-plaintext highlighter-rouge">n</code>_passwd = passw0rd <br />
+team<code class="language-plaintext highlighter-rouge">n</code>_role_name = my_team1_role <br />
+You can mention multiple collections as comma separated string. <br />
+team<code class="language-plaintext highlighter-rouge">n</code>_collections = Album1, SongAlbum <br /></p>
+  </li>
+</ul>
+
+<h4 id="create_rbacpy"><a href="/MilvusRBAC/create_rbac.py">create_rbac.py</a></h4>
+<p>The main file which implements Role Base Access Control (RBAC). Run <code class="language-plaintext highlighter-rouge">python .\create_rbac.py</code></p>
+<h4 id="test_rbacpy"><a href="/MilvusRBAC/test_rbac.py">test_rbac.py</a></h4>
+<p>For unit testing. Run <code class="language-plaintext highlighter-rouge">python -m unittest -v</code></p>
+<h4 id="delete_role_userpy"><a href="/MilvusRBAC/delete_role_user.py">delete_role_user.py</a></h4>
+<p>Used for deleting Role and User. Run <code class="language-plaintext highlighter-rouge">python .\delete_role_user.py</code></p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
