@@ -1,3 +1,7 @@
+"""
+This is a utility file for removing, user and roles.
+You can change password of a user.
+"""
 from pymilvus import (connections, utility, Role)
 import sys
 from libs import ReadConfig
@@ -51,10 +55,26 @@ def delete_user(user_name):
     connections.disconnect(connection_alias)
 
 
+def change_password():
+    connection_alias = connect_to_milvus("default")
+    user_name = input("Enter User Name: ")
+    all_user = utility.list_usernames()
+    if user_name not in all_user:
+        raise ValueError("Username incorrect!")
+    old_password = input("Enter Old password: ")
+    new_password = input("Enter new password: ")
+    try:
+        utility.update_password(user_name, old_password, new_password)
+        connections.disconnect(connection_alias)
+    except Exception as e:
+        print(e)
+
+
 if __name__ == '__main__':
-    delete_role("my_team1_role")
-    delete_role("my_team2_role")
-    delete_role("my_team3_role")
-    delete_user("my_team1_usr")
-    delete_user("my_team2_usr")
-    delete_user("my_team3_usr")
+    # delete_role("my_team1_role")
+    # delete_role("my_team2_role")
+    # delete_role("my_team3_role")
+    # delete_user("my_team1_usr")
+    # delete_user("my_team2_usr")
+    # delete_user("my_team3_usr")
+    change_password()
