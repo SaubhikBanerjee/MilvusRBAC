@@ -30,4 +30,5 @@ The main file which implements Role Base Access Control (RBAC). Run `python .\cr
 #### [test_rbac.py](test_rbac.py) 
 For unit testing. Run `python -m unittest -v`
 #### [delete_role_user.py](delete_role_user.py)
-Used for deleting Role and User. Run `python .\delete_role_user.py`
+Used for deleting Role and User. You can call change password also to change password.
+Run `python .\delete_role_user.py`
